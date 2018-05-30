@@ -1,0 +1,61 @@
+dir()
+help("read.csv")
+cars<-read.csv(file="cars.csv", head=TRUE, sep=",")
+names(cars)
+attributes(cars)
+dim(cars)
+nrow(cars)
+ncol(cars)
+length(cars)
+dim(cars)[2]
+summary(cars)
+summary(cars$Make)
+lapply(cars, summary)
+range(cars$Width)
+sd(cars$Width)
+View(cars)
+library(discretization)
+library(arules)
+summary(cars$city_mpg)
+str(cars)
+cars$city_mpg<-discretize(cars$city_mpg, "frequency", breaks=6)
+summary(cars$hwy_mpg)
+cars$hwy_mpg<-discretize(cars$hwy_mpg, "frequency", breaks=6)
+rm(cars)
+cars$city_mpg<-discretize(cars$city_mpg, "cluster", breaks=6)
+summary(cars$Wheelbase)
+cars$Wheelbase<-discretize(cars$Wheelbase, "fixed", breaks=c(-Inf, 90, 100, 110, Inf))
+summary(cars$Length)
+cars$Length<-cut(cars$Length, 4)
+newcars<-cars[, -1]
+View(newcars)
+newcars<-cars [, - c(1, 3, 4)]
+newcars<-cars [,  c(1, 2, 3, 4, 5)]
+newcars<-cars[1:5]
+newcars<-cars
+newcars$Id<-NULL
+newcars<-cars[1:10,]
+newcars<-subset(cars, complete.cases(cars))
+newcars<-cars[complete.cases(cars),]
+newcars<-na.omit(cars)
+cars[!complete.cases(cars),]
+nrow(cars[!complete.cases(cars),])
+apply(cars, 1, function (cars) sum(is.na(cars)))
+apply(cars, 2, function (cars) sum(is.na(cars)))
+cars$Hp[is.na(cars$Hp)]<-mean(cars$Hp, na.rm=TRUE)
+cars$price[is.na(cars$price)]<-mean(cars$price, na.rm=TRUE)
+apply(cars, 2, function (cars) sum(is.na(cars)))
+newcars<-subset.data.frame(cars, cars$symboling=="-2")
+View(newcars)
+cars_sorted<-cars[order(cars$price), ]
+head(cars_sorted$price)
+write.csv(cars, file="CarsD.csv", row.names=FALSE)
+dir()
+plot(table(cars$symboling), type="h", col="dark green")
+pie(table (cars$Bodystyle))
+hist(cars$Hp, col="blue")
+boxplot(cars$Height, col="maroon")
+plot(table(cars$Cylinders), type="s", col="dark red")
+plot(table(cars$Bodystyle), type="l", col="dark orange")
+plot(table(cars$Bodystyle), type="p", col="dark magenta")
+plot(table(cars$Bodystyle), type="b", col="cyan")
