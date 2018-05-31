@@ -46,4 +46,6 @@ rm(credit)
 credit <- utils::read.csv(file="CreditApproval.csv", head=TRUE, sep=",")
 credit_sorted<-credit[order(credit$A6), ]
 head(credit_sorted$A6)
+#Part2ei
+plot(table(credit$A6), type="h", col="blue")
 
